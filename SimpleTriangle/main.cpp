@@ -7,14 +7,13 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow* window);
 
 // settings
-const unsigned int SCR_WIDTH = 800;
-const unsigned int SCR_HEIGHT = 600;
+const unsigned int SCR_WIDTH = 1200;
+const unsigned int SCR_HEIGHT = 800;
 
 unsigned int shaderProgram;
 
 unsigned VAO;    // Vertex Array Object
 unsigned VBO;    // Vertex Buffer Object
-
 
 // GLSL Vertex Shader
 const char* vertexShaderSource = "#version 330 core\n"
@@ -74,7 +73,8 @@ void setup_shader()
 
     // check for linking errors
     glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
-    if (!success) {
+    if (!success) 
+    {
         glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
         std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" << infoLog << std::endl;
     }
@@ -111,6 +111,15 @@ void setup_vertex()
     // You can unbind the VAO afterwards so other VAO calls won't accidentally modify this VAO, but this rarely happens. Modifying other
     // VAOs requires a call to glBindVertexArray anyways so we generally don't unbind VAOs (nor VBOs) when it's not directly necessary.
     glBindVertexArray(0);
+}
+
+void setup_textures()
+{
+    float texCoords[] = {
+        -0.5f, -0.5f,
+        0.5f, -0.5f, 
+        -0.5f, 0.5f
+    };
 }
 
 int main()
